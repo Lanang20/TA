@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <title>Landing Page | Cermat Jaya</title>
+</head>
+<body>
+    <div class="container my-4">
+        <nav class="navbar navbar-expand-lg navbar-light custom-nav">
+            <a class="navbar-brand" href="#">
+                <span>CermatJaya</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#About">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <section id="Home">
+        <div class="container col-xxl-8 px-4 py-12">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-12">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="{% static 'images/gambar-home.svg' %}" class="d-block mx-lg-auto img-fluid" alt="gambar-home" width="450" height="450" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-2 mb-3">Bingung Memilih Jurusan Kuliah di UNJAYA? Cermat Jaya Aja!</h1>
+                    <p class="lead">Jangan biarkan keraguan menghalangi langkah besarmu. Cermat Jaya hadir sebagai solusi untuk membantumu menemukan jurusan di UNJAYA yang 
+                        paling sesuai dengan minat dan kepribadianmu. Temukan passionmu dan arahkan masa depanmu dengan tepat bersama Cermat Jaya. 
+                        Klik login untuk memulai, atau daftar jika belum memiliki akun.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button type="button" class="btn btn-success btn-sm btn-login px-4 me-md-2" 
+                        data-bs-toggle="modal" data-bs-target="#exampleModal4" data-bs-whatever="@mdo"><i class="bi-box-arrow-in-right"></i> Login</button>
+                        <a href="{% url 'daftar' %}" class="btn btn-outline-secondary btn-daftar btn-sm px-4">Daftar</a>
+                    </div>
+                    <!-- Modal Login -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl bg-transparent" style="border: none;">
+                                <div class="modal-content bg-transparent" style="border: none;">
+                                    <div class="modal-body bg-transparent" style="border: none;">
+                                        <div class="container py-5 h-100">
+                                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                                <div class="col col-xl-10">
+                                                    <div class="card shadow" style="border-radius: 1rem;">
+                                                        <div class="row g-5">
+                                                            <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                                                <img id="gambar-login" src="{% static 'images/bg-login.svg' %}" alt="login form" class="img-fluid">
+                                                            </div>
+                                                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                                                <div class="card-body p-4 p-lg-5 text-black">
+                                                                    <form method="post" action="{% url 'login_view' %}">
+                                                                        <h5 class="h5-login mb-3">Silahkan login ke akun anda</h5>
+                                                                        {% if msg %}
+                                                                            <div class="alert alert-danger col-10" role="alert">
+                                                                            {{ msg }}
+                                                                            </div>
+                                                                        {% endif %}
+                                                                        {% csrf_token %}
+                                                                        <div class="mb-1 col-10">
+                                                                            <label for="recipient-username" class="col-form-label">Username</label>
+                                                                            <input type="text" name="username" class="form-control" id="recipient-username" required>
+                                                                        </div>
+                                                                        <div class="mb-3 col-10">
+                                                                            <label for="recipient-password" class="col-form-label">Password</label>
+                                                                            <input type="password" name="password" class="form-control" id="recipient-password" required>
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <button type="submit" class="btn btn-success btn-sm btn-login px-4 me-md-2">Login</button>
+                                                                            <a href="{% url 'index' %}" class="btn btn-danger btn-cancel btn-sm px-4" data-bs-dismiss="modal">Cancel</a>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="About" class="py-3 py-md-5">
+        <div class="container col-xxl-8 px-4 py-12">
+            <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <img src="{% static 'images/gambar-overview.svg' %}" class="d-block mx-lg-auto img-fluid" alt="gambar-overview" width="450" height="450" loading="lazy">
+                </div>
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <div class="row justify-content-xl-center">
+                        <div class="col-12 col-xl-11">
+                            <h1 class="mb-3">Apa Itu Cermat Jaya?</h1>
+                            <p class="lead text-secondary mb-3">Kami memahami betapa menantangnya memilih jurusan kuliah yang tepat. Berdasarkan pengalaman pribadi dan semangat untuk membantu sesama, kami mengembangkan 
+                                Cermat Jaya sebagai platform yang memberikan rekomendasi jurusan berdasarkan minat dan kepribadian calon mahasiswa.</p>
+                            <p class="mb-5" style="color: black;">Cermat Jaya (Cek Rekomendasi Minat dan Jurusan UNJAYA) merupakan sistem pendukung keputusan yang dirancang untuk membantu calon mahasiswa dalam menentukan 
+                                pilihan program studi di Universitas Jenderal Achmad Yani Yogyakarta (UNJAYA). Dengan memanfaatkan pendekatan teori kepribadian RIASEC dan algoritma K-Nearest Neighbor 
+                                (KNN), sistem ini memberikan rekomendasi jurusan yang sesuai dengan karakteristik dan kecenderungan minat pengguna.</p>
+                            <div class="row gy-4 gy-md-0 gx-xxl-5X">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="me-4 text-primary">
+                                            <i class="bi bi-gear-fill" style="font-size: 32px; color: #3E7B27;"></i>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 mb-3 fw-bold" style="color: #3E7B27; font-size: 18px;">Teori Kepribadian RIASEC</h2>
+                                            <p class="text-secondary mb-0">Berbasis analisis  psikologi kepribadian menggunakan teori kepribadian RIASEC (Holland Codes).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="me-4 text-primary">
+                                            <i class="bi bi-gear-fill" style="font-size: 32px; color: #3E7B27;"></i>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 mb-3 fw-bold" style="color: #3E7B27; font-size: 18px;">Algoritma K-Nearest Neighbor (KNN)</h2>
+                                            <p class="text-secondary mb-0">Metode klasifikasi berbasis AI. Mengklasifikasikan data hasil tes dengan data yang ada dalam dataset.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Services">
+        <div class="container col-xxl-8 px-4 py-12">
+            <h1 class="py-5 text-center">Services</h1>
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-12">
+                <div class="row justify-content-center my-5">
+                    <div class="col-sm-5 mb-3 mb-sm-0">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold"><i class="bi bi-info-circle"></i> Informasi Jurusan</h5>
+                                <p class="card-text">Temukan informasi mengenai berbagai jurusan kuliah yang tersedia 
+                                    di UNJAYA. Mulai dari deskripsi jurusan hingga 
+                                    peluang karier di masa depan. Informasi ini akan membantu Anda mengenal lebih dalam setiap 
+                                    pilihan yang ada sebelum menentukan jurusan yang tepat.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold"><i class="bi bi-file-text"></i> Tes Minat</h5>
+                                <p class="card-text">Melalui serangkaian pertanyaan yang dirancang secara khusus, 
+                                    tes ini membantu mengidentifikasi minat Anda. 
+                                    Hasil tes ini tidak hanya memberikan gambaran tentang preferensi Anda, 
+                                    tetapi juga memberikan rekomendasi jurusan kuliah yang sesuai dengan minat Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </section>
+    <section id="Contact">
+        <div class="container col-xxl-8 px-4 py-12">
+            <h1 class="mb-3 text-center" style="margin-top: 55px;">Contact Us</h1>
+            <p class="col-md-8 text-center">Jangan ragu untuk menghubungi kami. Kami menghargai setiap pertanyaan, masukan, atau kolaborasi yang dapat memperkaya pengalaman pengguna kami.</p>
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-12">
+                <div class="row my-5">
+                    <form class="row justify-content-center g-3 needs-validation" action="{% url 'send_contact_email' %}" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-4">
+                            <label for="validationCustom01" class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" id="validationCustom01" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="validationCustom02" required>
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <label for="validationTextarea" class="form-label">Message</label>
+                            <textarea style="height: 150px;" name="message" class="form-control" id="validationTextarea" required></textarea>
+                        </div>
+                        <div class="mb-3 text-center">
+                          <button class="btn btn-kirim btn-primary" type="submit">Kirim</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top" style="background-color: #004F1F;">
+        <div class="container d-flex justify-content-between">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1">
+                    <!-- <img src="{% static 'images/logo.png' %}" alt="logo-dinporapar" width="45" height="47"></img> -->
+                </a>
+                <strong>
+                <span class="mb-3 mb-md-0 text-white fw-light" style="font-size: 13.5px;">
+                    Cermat Jaya &copy; 2025
+                </span>
+                </strong>
+            </div>   
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="text-white" href="">
+                        <i class="fa-brands fa-lg fa-x-twitter"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-white" href="">
+                        <i class="fa-brands fa-lg fa-square-facebook"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-white" href="">
+                        <i class="fa-brands fa-lg fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        // Menampilkan kembali modal jika terjadi kesalahan login
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = new bootstrap.Modal(document.getElementById('exampleModal4'));
+
+            // Periksa apakah pesan error ada pada modal
+            var errorAlert = document.querySelector('.alert-danger');
+            if (errorAlert) {
+                modal.show();
+            }
+        });
+        window.addEventListener('scroll', function(){
+            var navbar = document.querySelector('.custom-nav');
+            navbar.classList.toggle('sticky-navbar', window.scrollY > 0);
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Informasi Jurusan | Cermat Jaya{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ================ Jurusan ================= -->
+    <div class="jurusan">
+        <div class="cardJurusan">
+            <div class="cardHeader">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm" id="myTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Nama Jurusan</th>
+                                <th scope="col" style="text-align: center;">Deskripsi</th>
+                                <th scope="col" style="text-align: center;">Prospek Kerja</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            {% for data in jurusan %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ data.nama_jurusan }}</td>
+                                    <td>{{ data.deskripsi }}</td>
+                                    <td>{{ data.prospek_kerja }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

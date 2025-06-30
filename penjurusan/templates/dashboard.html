@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Cermat Jaya{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ======================= kartu ================== -->
+    <div class="kartuBox">
+        <div class="kartu">
+            <div>
+                <div class="numbers">{{ total_pengguna }}</div>
+                <div class="kartuName">Total Pengguna</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="people-outline"></ion-icon>
+            </div>
+        </div>
+
+        <div class="kartu">
+            <div>
+                <div class="numbers">{{ total_tes }}</div>
+                <div class="kartuName">Total Tes</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="receipt-outline"></ion-icon>
+            </div>
+        </div>
+
+        <div class="kartu">
+            <div>
+                <div class="numbers">{{ total_jurusan }}</div>
+                <div class="kartuName">Total Jurusan</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="library-outline"></ion-icon>
+            </div>
+        </div>
+
+        <div class="kartu">
+            <div>
+                <div class="numbers">{{ total_soal }}</div>
+                <div class="kartuName">Jumlah Soal</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="help-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================ Highcharts ================= -->
+    <div class="welcome">
+        <div class="kartuWelcome">
+            <div class="kartuHeader">
+                <h2>Kecenderungan Aspek Minat Anda</h2>
+                <figure class="highcharts-figure">
+                    <div id="presentase"></div>
+                    <p class="highcharts-description">
+                        Keterangan Aspek Minat:
+                        <ul>
+                            <li><strong>Realistic (Tipe Pelaksana atau Praktis):</strong> 
+                                Minat dalam aktivitas fisik dan keterampilan praktis.</li>
+                            <li><strong>Investigative (Tipe Peneliti atau Analitis):</strong> 
+                                Minat dalam penelitian, analisis, dan pengumpulan informasi.
+                                Kuat dalam menyelesaikan masalah kompleks.</li>
+                            <li><strong>Artistic (Tipe Pencipta atau Kreatif):</strong> 
+                                Minat dalam ekspresi kreatif dan inovasi.</li>
+                            <li><strong>Social (Tipe Sosial):</strong> 
+                                Minat dalam bekerja dengan orang lain dan memberikan bantuan.</li>
+                            <li><strong>Enterprising (Tipe Komunikatif):</strong> 
+                                Minat dalam bekerja dengan orang, aktivitas persuasif, dan kepemimpinan.</li>
+                            <li><strong>Conventional (Tipe Administratif):</strong> 
+                                Minat dalam pekerjaan administratif dan pengaturan.
+                                Menyukai rutinitas dan bekerja dengan informasi terstruktur.</li>
+                        <ul>
+                    </p>
+                </figure>
+            </div>
+        </div>
+    
+
+        <!-- ================= Pengguna Terbaru ================ -->
+        <div class="penggunaTerbaru">
+            <div class="kartuHeader">
+                <h2>Pengguna Terbaru</h2>
+            </div>
+
+            <table>
+                {% for pengguna in pengguna_terbaru %}
+                    <tr>
+                        <td width="60px">
+                            {% if pengguna.jenis_kelamin == 'Laki-laki' %}
+                                <div class="imgBx"><img src="{% static 'images/laki-laki.svg' %}" alt=""></div>
+                            {% elif pengguna.jenis_kelamin == 'Perempuan' %}
+                                <div class="imgBx"><img src="{% static 'images/perempuan.svg' %}" alt=""></div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <h4>{{ pengguna.first_name }} <br> <span>{{ pengguna.asal_sekolah }}</span></h4>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script>
+        // Mendeteksi ukuran layar dengan media query
+        var isLargeScreen = window.matchMedia('(min-width: 481px)').matches;
+
+        // Build the chart
+        Highcharts.chart('presentase', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Presentase dari seluruh hasil tes Anda'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: [{
+                        enabled: true,
+                        distance: 20
+                    }, {
+                        // Hanya menambahkan dataLabels jika ukuran layar cukup besar
+                        enabled: isLargeScreen,
+                        distance: -40,
+                        format: '{point.percentage:.1f}%',
+                        style: {
+                            fontSize: '1.2em',
+                            textOutline: 'none',
+                            opacity: 0.7
+                        },
+                        filter: {
+                            operator: '>',
+                            property: 'percentage',
+                            value: 4
+                        }
+                    }]
+                }
+            },
+            series: [
+                {
+                    name: 'Percentage',
+                    colorByPoint: true,
+                    data: [
+                    {
+                            name: 'Realistic',
+                            y: {{ realistic_count }}
+                        },
+                        {
+                            name: 'Investigative',
+                            y: {{ investigative_count }}
+                        },
+                        {
+                            name: 'Artistic',
+                            y: {{ artistic_count }}
+                        },
+                        {
+                            name: 'Social',
+                            y: {{ social_count }}
+                        },
+                        {
+                            name: 'Enterprising',
+                            y: {{ enterprising_count }}
+                        },
+                        {
+                            name: 'Conventional',
+                            y: {{ conventional_count }}
+                        }
+                    ]
+                }
+            ]
+        });
+    </script>
+{% endblock %}

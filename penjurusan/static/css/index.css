@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Poppins&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 120px;
+}
+#Home img#gambar-login {
+    margin-top: 20px;
+}
+/* CSS Untuk Navbar */
+.custom-nav {
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 35px 70px;
+    z-index: 1000;
+    transition: 0.5s;
+}
+.custom-nav.sticky-navbar {
+    background-color: #004F1F;
+    padding: 10px 100px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+.custom-nav.sticky-navbar #navbarNav .navbar-nav .nav-item .nav-link {
+    color: white;
+}
+.custom-nav.sticky-navbar .navbar-brand span {
+    color: white;
+}
+.custom-nav .navbar-brand img {
+    width: 30px;
+    height: 30px;
+    margin-top: -7px;
+}
+.custom-nav .navbar-brand span {
+    font-family: 'Caveat Brush', cursive;
+    color: #3E7B27;
+    font-weight: 400;
+    font-size: 38px;
+    margin-left: 0.4em;
+}
+.custom-nav #navbarNav .navbar-nav .nav-item .nav-link {
+    color: #3E7B27;
+    font-weight: 800;
+    font-size: 17px;
+    margin-left: 2.4em;
+    transition: 0.3s color ease;
+}
+.custom-nav #navbarNav .navbar-nav .nav-item .nav-link:hover {
+    display: inline-block;
+    color: white;
+    background-color: #004F1F;
+    border-radius: 2em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+.custom-nav.sticky-navbar #navbarNav .navbar-nav .nav-item .nav-link:hover {
+    display: inline-block;
+    color: #004F1F;
+    background-color: white;
+    border-radius: 2em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* CSS untuk section Home */
+#Home p {
+    font-size: 15px;
+    text-align: justify;
+}
+#Home h1 {
+    color: #3E7B27;
+    font-size: 30px;
+}
+#Home {
+    background-image: url(/static/images/circle-home.svg);
+    background-repeat: no-repeat;
+    background-size: 30vmax;
+    background-position-x: 120px;
+    background-position-y: 415px;
+}
+.btn-login {
+    display: inline-block;
+    color: white;
+    background-color: #157347;
+    border-radius: .4em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+.h5-login {
+    font-family: 'Caveat Brush', cursive;
+    color: #3E7B27;
+    font-size: 35px;
+}
+.btn-cancel {
+    display: inline-block;
+    color: #157347;
+    border: 1px solid #157347;
+    background-color: transparent;
+    border-radius: .4em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+#Home .btn-daftar {
+    color: #157347;
+    border: 1px solid #157347;
+    padding: 0.5em 2em;
+    background-color: transparent;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* CSS untuk section About */
+#About p {
+    color: black;
+    font-size: 15px;
+    text-align: justify;
+}
+#About h1 {
+    font-family: 'Caveat Brush', cursive;
+    color: #3E7B27;
+    font-size: 38px;
+}
+
+/* CSS untuk section Services */
+#Services {
+    background-color: #004F1F;
+    padding-bottom: 80px;
+    background-image: url(/static/images/circle-services.svg);
+    background-repeat: no-repeat;
+    background-size: 30vmax;
+    background-position-x: 120px;
+    background-position-y: 380px;
+}
+#Services h1 {
+    font-family: 'Caveat Brush', cursive;
+    color: #ffffff;
+    font-size: 40px;
+}
+#Services p {
+    font-size: 15px;
+    text-align: justify;
+}
+#Services i {
+    background: rgba(0, 136, 43, 0.2);
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+#Services h5 {
+    color: #3E7B27;
+}
+#Services .custom-card {
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+#Services .card-body {
+    margin: 9px 5px;
+}
+
+/* CSS untuk section Contact */
+#Contact .btn-kirim {
+    display: inline-block;
+    color: white;
+    background-color: #157347;
+    border-radius: .4em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+#Contact h1 {
+    font-family: 'Caveat Brush', cursive;
+    color: #3E7B27;
+    font-size: 40px;
+}
+#Contact p {
+    font-size: 15px;
+    margin-left: 185px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .custom-nav {
+        background-color: #ffffff;
+    }
+    .custom-nav a.navbar-brand {
+        position: relative;
+        margin-left: 40px;
+        margin-top: -25px;
+    }
+    .custom-nav.sticky-navbar a.navbar-brand {
+        position: relative;
+        margin-left: -5px;
+        margin-top: 1px;
+    }
+    button.navbar-toggler {
+        position: fixed;
+        left: 0;
+        top: 0;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+    .custom-nav.sticky-navbar .navbar-toggler {
+        filter: brightness(0) invert(1); /* Membalik warna menjadi putih */
+    }
+    ul.navbar-nav {
+        text-align: center;
+    }
+    #Home {
+        background-image: none;
+    }
+    #Home img {
+        margin-top: 20px;
+        margin-left: 35px;
+    }
+    #About p {
+        color: #000;
+        font-size: 15px;
+        text-align: justify;
+    }
+    #About img {
+        margin-top: 20px;
+        /* margin-left: 35px; */
+    }
+    #About h1 {
+        font-family: 'Caveat Brush', cursive;
+        color: #3E7B27;
+        font-size: 38px;
+    }
+    #Services {
+        background-image: none;
+    }
+    #Services .card.custom-card {
+        margin-left: 20px;
+    }
+    #Contact p {
+        margin-left: 0;
+    }
+    #Contact .row.my-5 form {
+        margin-left: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    #Home img#gambar-login {
+        margin: 0;
+    }
+    #Home {
+        background-image: none;
+    }
+    #Home img {
+        margin-top: 20px;
+        margin-left: 15vw;
+    }
+    .custom-nav {
+        background-color: #ffffff;
+    }
+    ul.navbar-nav {
+        text-align: center;
+    }
+    #About {
+        background-image: none;
+    }
+    #About p {
+        color: #000;
+        font-size: 15px;
+        text-align: justify;
+    }
+    #About img {
+        margin-top: 20px;
+        margin-left: 15vw;
+    }
+    #About h1 {
+        font-family: 'Caveat Brush', cursive;
+        color: #3E7B27;
+        font-size: 38px;
+    }
+    #Services {
+        background-image: none;
+    }
+    #Services h5 {
+        line-height: 27px;
+    }
+    #Services .card.custom-card {
+        margin-left: 15px;
+        margin-bottom: 5px;
+    }
+    #Contact p {
+        margin-left: 115px;
+    }
+    #Contact .row.my-5 form {
+        margin-left: auto;
+    }
+    .col-md-6 {
+        width: 100%;
+    }
+}
+@media (min-width: 991px) {
+    #Contact p {
+        font-size: 15px;
+        margin-left: 185px;
+    }
+    #Home {
+        background-image: url(/static/images/circle-home.svg);
+        background-repeat: no-repeat;
+        background-size: 30vmax;
+        background-position-x: 120px;
+        background-position-y: 415px;
+    }
+    #About p {
+        color: #0000;
+        font-size: 15px;
+        text-align: justify;
+    }
+    #About h1 {
+        font-family: 'Caveat Brush', cursive;
+        color: #3E7B27;
+        font-size: 38px;
+    }
+    #Services {
+        background-color: #004F1F;
+        padding-bottom: 80px;
+        background-image: url(/static/images/circle-services.svg);
+        background-repeat: no-repeat;
+        background-size: 30vmax;
+        background-position-x: 120px;
+        background-position-y: 380px;
+    }
+}

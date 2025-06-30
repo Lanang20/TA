@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}Hasil Tes | Cermat Jaya{% endblock %}
+{% block content %}
+{% load static %}
+<!-- Tampilkan hasil penjurusan atau pesan kesalahan jika tidak ada hasil -->
+<div class="hasil_tes">
+    <div class="cardHasil_tes">
+        <div class="cardHeader">
+            <h1>Hasil Tes</h1>
+            <div class="alert alert-success">
+                <strong>Tanggal Tes:</strong> {{ tes.tanggal_tes|date:"l, d F Y H:i" }}
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover table-sm" id="myTable2">
+                    <thead>
+                        <tr>
+                            <th scope="col">Aspek RIASEC</th>
+                            <th scope="col">Skor</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td>Realistic</td>
+                            <td>{{ riasec_scores.realistic }}</td>
+                        </tr>
+                        <tr>
+                            <td>Investigative</td>
+                            <td>{{ riasec_scores.investigative }}</td>
+                        </tr>
+                        <tr>
+                            <td>Artistic</td>
+                            <td>{{ riasec_scores.artistic }}</td>
+                        </tr>
+                        <tr>
+                            <td>Social</td>
+                            <td>{{ riasec_scores.social }}</td>
+                        </tr>
+                        <tr>
+                            <td>Enterprising</td>
+                            <td>{{ riasec_scores.enterprising }}</td>
+                        </tr>
+                        <tr>
+                            <td>Conventional</td>
+                            <td>{{ riasec_scores.conventional }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h1>Prediksi Jurusan</h1>
+            <div class="alert alert-success" style="text-align: justify;">
+                <strong>Jurusan yang sesuai dengan minat Anda adalah:</strong> {{ rekomendasi_jurusan.nama_jurusan }}<br><br>
+                <strong>Deskripsi Jurusan:</strong> {{ rekomendasi_jurusan.deskripsi }}<br><br>
+                <strong>Prospek Kerja:</strong> {{ rekomendasi_jurusan.prospek_kerja }}
+            </div>
+            <h1>Visualisasi Skor RIASEC</h1>
+            <div id="riasecRadarChart" style="width: 100%; height: 400px; margin-bottom: 50px;"></div>
+            <button class="btn btn-danger btn-md d-flex align-items-center px-4 me-md-2" id="cetakPdfButton">
+                <ion-icon style="width: 22px; height: 22px;" name="reader-outline"></ion-icon><span style="padding: 0 4px;">Cetak PDF</button>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('cetakPdfButton').addEventListener('click', function() {
+        window.open('{% url "generatePDF" %}', '_blank');
+    });
+</script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script>
+    Highcharts.chart('riasecRadarChart', {
+        chart: {
+            polar: true,
+            type: 'line'
+        },
+
+        title: {
+            text: 'Profil Minat RIASEC',
+        },
+
+        exporting: {
+            enabled: true
+        },
+
+        accessibility: {
+            enabled: true
+        },
+
+        pane: {
+            size: '80%'
+        },
+
+        xAxis: {
+            categories: ['Realistic', 'Investigative', 'Artistic', 'Social', 'Enterprising', 'Conventional'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0
+        },
+
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y}</b><br/>'
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        series: [{
+            name: 'Skor RIASEC',
+            data: [
+                {{ riasec_scores.realistic }},
+                {{ riasec_scores.investigative }},
+                {{ riasec_scores.artistic }},
+                {{ riasec_scores.social }},
+                {{ riasec_scores.enterprising }},
+                {{ riasec_scores.conventional }}
+            ],
+            pointPlacement: 'on',
+            color: '#3843D6'
+        }]
+    });
+</script>
+{% endblock %}

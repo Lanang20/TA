@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}Profile | Cermat Jaya{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ================ Profile ================= -->
+    <div class="profile">
+        <div class="cardProfile">
+            <div class="cardHeader">
+                <div class="container col-xxl-8 px-4 py-12">
+                    <h1 class="mb-4 text-center" style="margin-top: 35px;">Profile Anda</h1>
+                    <p class="col-md-8 text-center mb-5">Berikut adalah profil Anda, klik edit untuk mengubah data Anda.</p>
+                    <div class="row g-5">
+                        <div class="col-md-6 col-lg-5 d-flex d-md-block">
+                            <img src="{% static 'images/profile.svg' %}" alt="daftar" class="img-fluid">
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex d-md-block">
+                            <form id="profile-form" class="row g-3" method="post" action="{% url 'edit_profile' %}">
+                                {% csrf_token %}
+                                <div class="col-md-5">
+                                    <label for="validationDefault01" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" id="validationDefault01" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationCustom04" class="form-label">Jenis Kelamin</label>
+                                    <select class="form-select" name="jenis_kelamin" id="validationCustom04" required>
+                                        {% if user.jenis_kelamin == 'Laki-laki' %}
+                                            <option selected value="Laki-laki">Laki-laki</option>
+                                            <option value="Perempuan">Perempuan</option>
+                                        {% elif user.jenis_kelamin == 'Perempuan' %}
+                                            <option value="Laki-laki">Laki-laki</option>
+                                            <option selected value="Perempuan">Perempuan</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationCustomUsername" class="form-label">Tanggal Lahir</label>
+                                    <div class="input-group has-validation">
+                                        <input type="date" class="form-control" id="validationCustomUsername" name="tanggal_lahir" aria-describedby="inputGroupPrepend" value="{{ user.tanggal_lahir|date:'Y-m-d' }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationDefault02" class="form-label">Asal Sekolah</label>
+                                    <input type="text" class="form-control" name="asal_sekolah" value="{{ user.asal_sekolah }}" id="validationDefault02" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationDefault02" class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="username" value="{{ user.username }}" id="validationDefault02" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationDefault02" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" value="{{ user.email }}" id="validationDefault02" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationDefault02" class="form-label">Ganti Password</label>
+                                    <input type="password" placeholder="Isi jika diperlukan" class="form-control" name="password" id="validationDefault02">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="validationDefault02" class="form-label">Nomor Handphone</label>
+                                    <input type="text" class="form-control" name="no_hp" value="{{ user.no_hp }}" id="validationDefault02" required>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success btn-edit btn-sm px-4 me-md-2">Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("profile-form");
+
+            form.addEventListener("submit", function (event) {
+                // Hentikan pengiriman formulir
+                event.preventDefault();
+
+                // Tampilkan SweetAlert untuk konfirmasi
+                Swal.fire({
+                    width: 600,
+                    title: "Konfirmasi Edit",
+                    text: "Apakah Anda yakin ingin menyimpan perubahan?",
+                    icon: "warning",
+                    iconColor: "#dc3545",
+                    showCancelButton: true,
+                    confirmButtonColor: "#157347",
+                    cancelButtonColor: "#dc3545",
+                    confirmButtonText: "Ya, Simpan!",
+                    cancelButtonText: "Cancel",
+                }).then((result) => {
+                    // Jika pengguna mengonfirmasi
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            width: 600,
+                            title: "Disimpan!",
+                            text: "Perubahan berhasil disimpan.",
+                            icon: "success",
+                            confirmButtonColor: "#157347",
+                        }).then(() => {
+                            // Lanjutkan dengan pengiriman formulir
+                            form.submit();
+                        });
+                    } else if (result.isDismissed) {
+                        Swal.fire({
+                            width: 600,
+                            title: "Dibatalkan!",
+                            text: "Perubahan yang Anda lakukan tidak disimpan.",
+                            icon: "error",
+                            confirmButtonColor: "#157347",
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

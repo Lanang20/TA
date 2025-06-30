@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Tes RIASEC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .card {
+            background: #D1E7DD;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: justify;
+        }
+
+        .card h3 {
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background: #f8f8f8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hasil Tes RIASEC</h1>
+
+        <h2>Rekomendasi Jurusan</h2>
+        <div class="card">
+            <p style="font-size: large;">
+                <strong>Nama Jurusan:</strong> {{ penjurusan.jurusan.nama_jurusan }}<br><br>
+                <strong>Deskripsi:</strong> {{ penjurusan.jurusan.deskripsi }}<br><br>
+                <strong>Prospek Kerja:</strong> {{ penjurusan.jurusan.prospek_kerja }}
+            </p>
+        </div>
+
+        <h2>Skor RIASEC</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Aspek RIASEC</th>
+                    <th style="text-align: center;">Skor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Realistic</td>
+                    <td style="text-align: center;">{{ riasec_scores.realistic }}</td>
+                </tr>
+                <tr>
+                    <td>Investigative</td>
+                    <td style="text-align: center;">{{ riasec_scores.investigative }}</td>
+                </tr>
+                <tr>
+                    <td>Artistic</td>
+                    <td style="text-align: center;">{{ riasec_scores.artistic }}</td>
+                </tr>
+                <tr>
+                    <td>Social</td>
+                    <td style="text-align: center;">{{ riasec_scores.social }}</td>
+                </tr>
+                <tr>
+                    <td>Enterprising</td>
+                    <td style="text-align: center;">{{ riasec_scores.enterprising }}</td>
+                </tr>
+                <tr>
+                    <td>Conventional</td>
+                    <td style="text-align: center;">{{ riasec_scores.conventional }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            <strong>Keterangan Aspek RIASEC:</strong>
+            <ul>
+                <li><strong>Realistic (Tipe Pelaksana atau Praktis):</strong> 
+                    Minat dalam aktivitas fisik dan keterampilan praktis.</li>
+                <li><strong>Investigative (Tipe Peneliti atau Analitis):</strong> 
+                    Minat dalam penelitian, analisis, dan pengumpulan informasi.
+                    Kuat dalam menyelesaikan masalah kompleks.</li>
+                <li><strong>Artistic (Tipe Pencipta atau Kreatif):</strong> 
+                    Minat dalam ekspresi kreatif dan inovasi.</li>
+                <li><strong>Social (Tipe Sosial):</strong> 
+                    Minat dalam bekerja dengan orang lain dan memberikan bantuan.</li>
+                <li><strong>Enterprising (Tipe Komunikatif):</strong> 
+                    Minat dalam bekerja dengan orang, aktivitas persuasif, dan kepemimpinan.</li>
+                <li><strong>Conventional (Tipe Administratif):</strong> 
+                    Minat dalam pekerjaan administratif dan pengaturan.
+                    Menyukai rutinitas dan bekerja dengan informasi terstruktur.</li>
+            </ul>
+        </p>
+
+        <p><strong>Tanggal Tes:</strong> {{ penjurusan.tes.tanggal_tes|date:"l, d F Y H:i" }}</p>
+
+        <div class="footer">
+            <p>
+                @{{ user.username }} - Hasil Tes Minat
+                <span style="color: blue;text-decoration: underline;">CermatJaya.com</span>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

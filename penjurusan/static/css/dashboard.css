@@ -1,0 +1,770 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Poppins&display=swap');
+
+/* =============== Globals ============== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Ubuntu", sans-serif;
+}
+:root {
+    --blue: #3843D6;
+    --white: #fff;
+    --black1: #222;
+    --black2: #999;
+    --green1: #004F1F;
+    --green2: #3E7B27;
+    --green3: #157347;
+}
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.pembungkus {
+    position: relative;
+    width: 100%;
+}
+
+/* =============== Navigation ================ */
+.navigation {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--green1);
+    border-left: 10px solid var(--green1);
+    transition: 0.5s;
+    overflow: hidden;
+}
+.navigation.active {
+    width: 80px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+    background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+    color: var(--green1);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+.navigation ul li a .icon ion-icon {
+    font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+.navigation ul li a .titleMain {
+    font-family: 'Caveat Brush', cursive;
+    font-size: x-large;
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+/* ===================== Main ===================== */
+.main {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.5s;
+}
+.main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+.topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.topbar .sticky-topbar {
+    background-color: #ffffff;
+    padding: 10px 100px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.user {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ======================= kartu ====================== */
+.kartuBox {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.kartuBox .kartu {
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.kartuBox .kartu .numbers {
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: var(--green2);
+}
+
+.kartuBox .kartu .kartuName {
+    color: var(--black2);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.kartuBox .kartu .iconBx {
+    font-size: 3.5rem;
+    color: var(--black2);
+}
+
+.kartuBox .kartu:hover {
+    background: var(--green1);
+}
+.kartuBox .kartu:hover .numbers,
+.kartuBox .kartu:hover .kartuName,
+.kartuBox .kartu:hover .iconBx {
+    color: var(--white);
+}
+
+/* ================== Welcome ============== */
+.welcome {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+}
+
+.welcome .kartuWelcome {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.welcome img {
+    width: 400px;
+    height: 400px;
+}
+
+.welcome figure ul li {
+    list-style: decimal;
+    text-align: left;
+}
+.welcome figure p {
+    text-align: left;
+}
+.welcome .kartuHeader {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.kartuHeader h2 {
+    font-weight: 600;
+    color: var(--green2);
+}
+.kartuHeader .btn {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--green3);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+
+.penggunaTerbaru {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+.penggunaTerbaru .imgBx {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.penggunaTerbaru .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.penggunaTerbaru table tr td {
+    padding: 12px 10px;
+}
+.penggunaTerbaru table tr td h4 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2rem;
+}
+.penggunaTerbaru table tr td h4 span {
+    font-size: 14px;
+    color: var(--black2);
+}
+.penggunaTerbaru table tr:hover {
+    background: var(--green1);
+    color: var(--white);
+}
+.penggunaTerbaru table tr:hover td h4 span {
+    color: var(--white);
+}
+
+/* ================== HighCharts ============== */
+.highcharts-figure,
+.highcharts-data-table table {
+    min-width: 320px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+input[type="number"] {
+    min-width: 50px;
+}
+
+/* ================== Profile ============== */
+.profile {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    /* margin-top: 10px; */
+}
+
+.profile .cardProfile {
+    position: relative;
+    min-height: 500px;
+    height: 100vh;
+    width: 100vw;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.profile .cardHeader {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cardHeader h2 {
+    font-weight: 600;
+    color: var(--green2);
+}
+.cardHeader h1 {
+    font-family: 'Caveat Brush', cursive;
+    color: var(--green2);
+    font-size: 40px;
+}
+.cardHeader p {
+    font-size: 15px;
+    margin-left: 180px;
+}
+.btn-edit {
+    display: inline-block;
+    color: white;
+    background-color: var(--green3);
+    border-radius: .4em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+.btn-cancel {
+    display: inline-block;
+    color: #3843D6;
+    border: 1px solid #3843D6;
+    background-color: transparent;
+    border-radius: .4em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* ================== Jurusan ============== */
+.jurusan {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    /* margin-top: 10px; */
+}
+
+.jurusan td {
+    text-align: justify;
+}
+
+.jurusan #myTable th:nth-child(2) {
+    width: 15%; /* Ganti nilai sesuai kebutuhan */
+}
+
+.jurusan .cardJurusan {
+    position: relative;
+    min-height: 500px;
+    width: 100vw;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.jurusan .cardHeader {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* ================== Tes ============== */
+.tes {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    /* margin-top: 10px; */
+}
+
+.tes .cardTes {
+    position: relative;
+    min-height: 500px;
+    width: 100vw;
+    /* height: 84vh; width: 100vw; */
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.tes .cardHeader {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.tes .cardTes img {
+    width: 60vw;
+    height: 53vh;
+}
+.btn-mulai {
+    display: inline-block;
+    color: white;
+    background-color: var(--green3);
+    border-radius: .4em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.5s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* ================== Mulai Tes ============== */
+.mulai_tes {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+}
+
+.mulai_tes .cardMulai_tes {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+#quiz h2 {
+    margin-bottom: 10px;
+}
+#quiz ul {
+    list-style-type: none;
+    padding: 0;
+}
+#quiz ul li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+#quiz ul li label {
+    cursor: pointer;
+}
+#quiz ul li input {
+    margin-right: 8px;
+    cursor: pointer;
+}
+#quiz button {
+    background-color: var(--green3);
+    color: #fff;
+    border: none;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: inherit;
+    padding: 1.3rem;
+    border-radius: 10px;
+}
+#quiz button:hover {
+    background-color: #dc3545;
+}
+#quiz button:focus {
+    outline: none;
+    background-color: #44b927;
+}
+
+/* Petunjuk Pengerjaan */
+.tutorial {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.tutorial .cardHeader p {
+    font-size: 15px;
+    text-align: justify;
+    margin-left: 0;
+}
+
+/* ================== Hasil Tes ============== */
+.hasil_tes {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    /* margin-top: 10px; */
+}
+
+.hasil_tes .icon ion-icon {
+    font-size: 1.75rem;
+}
+
+.hasil_tes p {
+    margin-left: 0;
+    text-align: justify;
+}
+
+.hasil_tes .cardHasil_tes img {
+    width: 60vw;
+    height: 60vh;
+}
+
+.hasil_tes h1 {
+    text-align: center;
+}
+
+.hasil_tes ul li {
+    list-style: decimal;
+    text-align: justify;
+}
+
+.hasil_tes .cardHasil_tes {
+    position: relative;
+    min-height: 500px;
+    width: 100vw;
+    /* height: 84vh; width: 100vw; */
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.hasil_tes .cardHeader {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+/* .tes .cardTes img {
+    width: 55vw;
+    height: 51vh;
+} */
+
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+    .navigation {
+        left: -300px;
+    }
+    .navigation.active {
+        width: 300px;
+        left: 0;
+    }
+    .main {
+        width: 100%;
+        left: 0;
+    }
+    .main.active {
+        left: 300px;
+    }
+    .kartuBox {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome {
+        grid-template-columns: 1fr;
+    }
+    .kartuWelcome {
+        overflow-x: auto;
+    }
+    .cardProfile .col-md-6 {
+        width: 100%;
+    }
+    .cardProfile form {
+        justify-content: center;
+    }
+    .cardProfile form .col-12 {
+        margin-left: 110px;
+    }
+    .profile {
+        grid-template-columns: 1fr;
+    }
+    .cardProfile {
+        overflow-x: auto;
+    }
+    .jurusan {
+        grid-template-columns: 1fr;
+    }
+    .cardJurusan {
+        overflow-x: auto;
+    }
+    .tes {
+        grid-template-columns: 1fr;
+    }
+    .cardTes {
+        overflow-x: auto;
+    }
+    .mulai_tes {
+        grid-template-columns: 1fr;
+    }
+    .cardMulai_tes {
+        overflow-x: auto;
+    }
+    .cardProfile p {
+        margin-left: 115px;
+    }
+    .cardTes p {
+        margin-left: 115px;
+    }
+}
+
+@media (max-width: 480px) {
+    .kartuBox {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .kartuHeader h2 {
+        font-size: 20px;
+    }
+    .cardHeader h2 {
+        font-size: 20px;
+    }
+    .user {
+        min-width: 40px;
+    }
+    .navigation {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+    .navigation.active {
+        width: 63%;
+        left: 0;
+    }
+    .toggle {
+        z-index: 10001;
+    }
+    .main.active .toggle {
+        color: #fff;
+        position: relative;
+        right: 0;
+        left: initial;
+    }
+    .cardProfile p {
+        margin-left: 0;
+    }
+    .cardProfile form .col-12 {
+        margin-left: 0;
+    }
+    .cardTes p {
+        margin-left: 0;
+    }
+}

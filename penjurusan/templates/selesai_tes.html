@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Tes Minat | Cermat Jaya{% endblock %}
+{% block content %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        Swal.fire({
+            title: "Tes Selesai!",
+            width: 600,
+            text: "Selamat, Anda telah menyelesaikan tes.",
+            icon: "success",
+            iconColor: "#28a745",
+            confirmButtonColor: "#157347",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let timerInterval;
+                Swal.fire({
+                    title: "Memproses Hasil Tes Anda",
+                    width: 600,
+                    html: "Memberikan rekomendasi jurusan dalam <b></b> mili detik.",
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector("b");
+                        timerInterval = setInterval(() => {
+                            timer.textContent = `${Swal.getTimerLeft()}`;
+                        }, 100);
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval);
+                    }
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        window.location.href = "{% url 'hasil_tes' %}";
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

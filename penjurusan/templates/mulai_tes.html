@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Tes Minat | Cermat Jaya{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ================ Mulai Tes ================= -->
+    <div class="mulai_tes">
+        <div class="cardMulai_tes">
+            <div class="cardHeader">
+                <div id="quiz">
+                    <!-- <h2 class="mb-3" id="question">{{ current_question.id }}. {{ current_question.soal }}</h2> -->
+                    <form id="quiz-form" method="post" action="{% url 'mulai_tes' %}">
+                        {% csrf_token %}
+
+                        {% for question in current_questions %}
+                            <div class="question-block">
+                                <h2 class="mb-3" style="font-size: 25px;">{{ start_number|add:forloop.counter0 }}. {{ question.soal }}</h2>
+
+                                <input type="hidden" name="question_ids" value="{{ question.id }}">
+
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="answer_{{ question.id }}" id="ya{{ question.id }}" value="Ya">
+                                        <label for="ya{{ question.id }}">Ya</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="answer_{{ question.id }}" id="tidak{{ question.id }}" value="Tidak">
+                                        <label for="tidak{{ question.id }}">Tidak</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" id="submit-btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= Petunjuk Pengerjaan ================ -->
+        <div class="tutorial">
+            <div class="cardHeader">
+                <h2 style="font-size: 25px;">Petunjuk Pengerjaan</h2>
+                <img src="{% static 'images/tutorial.svg' %}" style="width: 300px; height: 300px;" alt="">
+                <p>
+                    Tes berikut terdiri dari {{ total_soal }} pernyataan. Setiap pernyataan mewakili 
+                    salah satu dari enam aspek kepribadian RIASEC (Realistic, Investigative, Artistic, Social, 
+                    Enterprising, dan Conventional). Cukup pilih "Ya" atau "Tidak" untuk setiap pernyataan 
+                    sesuai dengan kecenderungan diri Anda.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("quiz-form");
+            const submitButton = document.getElementById("submit-btn");
+
+            form.addEventListener("submit", function (event) {
+                const totalQuestions = document.querySelectorAll(".question-block").length;
+                let allAnswered = true;
+
+                document.querySelectorAll(".question-block").forEach(block => {
+                    const radios = block.querySelectorAll('input[type="radio"]');
+                    const isChecked = [...radios].some(radio => radio.checked);
+                    if (!isChecked) {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: "Pilih Semua Jawaban!",
+                        iconColor: "#dc3545",
+                        width: 600,
+                        text: "Pastikan semua pertanyaan sudah dijawab!",
+                        icon: "warning",
+                        confirmButtonColor: "#157347"
+                    });
+                } else {
+                    submitButton.disabled = true;
+                }
+            });
+        });
+    </script>
+{% endblock %}

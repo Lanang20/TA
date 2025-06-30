@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Tes Minat | Cermat Jaya{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ================ Tes ================= -->
+    <div class="tes">
+        <div class="cardTes">
+            <div class="cardHeader">
+                <h1 class="mb-3">Tes Minat</h1>
+                <P class="col-md-8 text-center mb-2">Siap untuk mengetahui minat Anda? Tekan tombol "Mulai" untuk memulai tes. 
+                    Melalui serangkaian pertanyaan yang dirancang secara khusus, kami akan membantu menggali minat Anda.</P>
+                <img src="{% static 'images/tes.svg' %}" alt="">
+                <div class="col-12">
+                    <a href="{% url 'mulai_tes' %}" class="btn btn-success btn-mulai btn-sm px-4 me-md-2">Mulai</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
