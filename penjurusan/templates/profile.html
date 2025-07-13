@@ -91,15 +91,38 @@
                 }).then((result) => {
                     // Jika pengguna mengonfirmasi
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            width: 600,
-                            title: "Disimpan!",
-                            text: "Perubahan berhasil disimpan.",
-                            icon: "success",
-                            confirmButtonColor: "#157347",
-                        }).then(() => {
-                            // Lanjutkan dengan pengiriman formulir
-                            form.submit();
+                        const formData = new FormData(form);
+                        
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) return response.json().then(data => { throw data; });
+                            return response.json();
+                        })
+                        .then(data => {
+                            Swal.fire({
+                                width: 600,
+                                title: "Disimpan!",
+                                text: "Perubahan berhasil disimpan.",
+                                icon: "success",
+                                confirmButtonColor: "#157347",
+                            }).then(() => {
+                                window.location.href = data.redirect_url;
+                            });
+                        })
+                        .catch(data => {
+                            Swal.fire({
+                                width: data.width || 600,
+                                title: data.title || "Error",
+                                text: data.text || "Terjadi kesalahan",
+                                icon: data.icon || "error",
+                                confirmButtonColor: data.confirmButtonColor || "#157347",
+                            });
                         });
                     } else if (result.isDismissed) {
                         Swal.fire({

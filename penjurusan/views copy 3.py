@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import User, Jurusan, SoalMinat, JawabanMinat, Minat, Tes, Penjurusan, KlasifikasiRIASEC
 from django.contrib import messages
 from django.urls import reverse
@@ -154,20 +154,6 @@ def profile_view(request):
 def edit_profile(request):
     if request.method == 'POST':
         user = request.user
-        new_username = request.POST.get('username')
-
-        # Cek apakah username sudah digunakan
-        if User.objects.filter(username=new_username).exclude(pk=user.pk).exists():
-            # Tampilkan SweetAlert jika username sudah digunakan
-            response_data = {
-                'width': 600,
-                'title': 'Username Tidak Tersedia',
-                'text': 'Username sudah digunakan. Silahkan pilih username lain.',
-                'icon': 'error',
-                'confirmButtonColor': "#157347",
-            }
-            return JsonResponse(response_data, status=400)
-
         user.first_name = request.POST.get('first_name')
         user.jenis_kelamin = request.POST.get('jenis_kelamin')
         user.tanggal_lahir = request.POST.get('tanggal_lahir')
@@ -184,7 +170,8 @@ def edit_profile(request):
             update_session_auth_hash(request, user)
         user.save()
         
-        return JsonResponse({'redirect_url': reverse('profile_view')})
+        messages.success(request, 'Profil berhasil diperbarui.')
+        return HttpResponseRedirect(reverse('profile_view'))
 
 def send_contact_email(request):
     if request.method == 'POST':
@@ -324,40 +311,31 @@ def hasil_tes(request):
             y.append(data.id_jurusan.nama_jurusan)
 
         # Jalankan KNN
-        k = min(10, len(X))  # Ambil 10 tetangga terdekat atau kurang jika data sedikit
-        knn = KNeighborsClassifier(n_neighbors=k)
+        knn = KNeighborsClassifier(n_neighbors=3)  # ambil 3 terdekat
         knn.fit(X, y)
 
-        # Ambil indeks tetangga terdekat
+        # Prediksi 3 jurusan terdekat
         _, indices = knn.kneighbors([riasec_vector])
+        jurusan_terdekat = [y[i] for i in indices[0]]  # list nama jurusan
 
-        # Kumpulkan jurusan unik dari hasil tetangga
-        jurusan_terdekat_unik = []
-        jurusan_nama_set = set()
+        # Ambil objek jurusan berdasarkan nama
+        jurusan1 = Jurusan.objects.filter(nama_jurusan=jurusan_terdekat[0]).first()
+        jurusan2 = Jurusan.objects.filter(nama_jurusan=jurusan_terdekat[1]).first()
+        jurusan3 = Jurusan.objects.filter(nama_jurusan=jurusan_terdekat[2]).first()
 
-        for i in indices[0]:
-            nama_jurusan = y[i] # indeks tetangga terdekat secara urut dari paling mirip
-            if nama_jurusan not in jurusan_nama_set: # nama jurusan dari data ke-i
-                jurusan_obj = Jurusan.objects.filter(nama_jurusan=nama_jurusan).first()
-                if jurusan_obj:
-                    jurusan_terdekat_unik.append(jurusan_obj)
-                    jurusan_nama_set.add(nama_jurusan)
-                if len(jurusan_terdekat_unik) == 3:
-                    break
-
-        # Validasi apakah kita dapat 3 jurusan berbeda
-        if len(jurusan_terdekat_unik) < 3:
+        # Validasi minimal jurusan utama tersedia
+        if not jurusan1:
             return render(request, 'hasil_tes.html', {
-                'error': 'Tidak ditemukan cukup jurusan berbeda dari hasil prediksi.',
+                'error': 'Jurusan hasil prediksi tidak ditemukan.',
             })
 
         # Simpan hasil penjurusan
         Penjurusan.objects.create(
             user=user,
             tes=tes,
-            jurusan_1=jurusan_terdekat_unik[0],
-            jurusan_2=jurusan_terdekat_unik[1],
-            jurusan_3=jurusan_terdekat_unik[2]
+            jurusan_1=jurusan1,
+            jurusan_2=jurusan2,
+            jurusan_3=jurusan3
         )
 
         # Cari minat dengan skor tertinggi
@@ -372,12 +350,11 @@ def hasil_tes(request):
         return render(request, 'hasil_tes.html', {
             'tes': tes,
             'riasec_scores': skor_minat,
-            'jurusan_1': jurusan_terdekat_unik[0],
-            'jurusan_2': jurusan_terdekat_unik[1],
-            'jurusan_3': jurusan_terdekat_unik[2],
+            'jurusan_1': jurusan1,
+            'jurusan_2': jurusan2,
+            'jurusan_3': jurusan3,
             'minat_tertinggi': minat_tertinggi,
         })
-
 
 @login_required
 def generatePDF(request):
